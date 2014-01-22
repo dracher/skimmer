@@ -2,22 +2,12 @@
 /*
  * GET home page.
  */
-var dh = require('../utils/db_helpers');
+var fq = require('../utils/data_helpers');
 
 exports.index = function(req, res){
-  var ret = [];
-  req.db.serialize(function(){
-    req.db.each(dh.last_n_days.replace('%s', 5),
-      function(err, row){
-        if (err){
-          console.log(err);
-        }
-        ret.push(row.session_id);
-      },
-      function(err, rn){
-        res.render('index', {title: ret});
-        req.db.close();
-      }
-    )
-  });
+
+  var dq = new fq.RhevhQuery(req.db);
+
+  dq.get_specific_date([1,3,4,5]);
+  res.render('index')
 };
