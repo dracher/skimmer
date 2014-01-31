@@ -4,11 +4,12 @@ var gp;
 gp = require('../utils/data_helpers').GP;
 
 exports.main_page = function(req, res) {
-  var results;
+  var days, results;
+  days = parseInt(req.params[0]);
   results = [];
-  gp(req.db, 1, function(data, args) {
+  gp(req.db, days, function(data, args) {
     results.push([args[0], data]);
-    if (results.length === 1) {
+    if (results.length === days) {
       console.log(results);
       return res.render('index', {
         'res': results

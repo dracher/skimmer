@@ -37,7 +37,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/rhevh', rhevh.main_page);
+app.get(/^\/rhevh\/(\d{1,2})/, rhevh.main_page);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
